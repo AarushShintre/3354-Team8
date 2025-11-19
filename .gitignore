@@ -1,1 +1,39 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.env
+.venv
+venv/
+
+# Flask local files
+backend/myenv/
+
+# Node/Next.js
+node_modules/
+.next/
+.turbo/
+pnpm-lock.yaml
+yarn.lock
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+.pytest_cache/
+
+# IDE/editor
+.vscode/
+.idea/
+
+# Build artifacts
+dist/
+build/
+
+# Other temp
+*.swp
+*.swo
 *.env

@@ -1,23 +1,61 @@
-# 3354-Team8
+# CometCommuter Operations Hub
 
-Install Node.js
-Install Python
+CometCommuter is a market-ready rideshare operations workspace built with a Next.js + Tailwind frontend (`frontend/`) and a Flask API backend (`backend/`). It packages profile management, compatibility modeling, fare recommendations, rider feedback, policy intake, and manual dark/light controls into one cohesive tool.
 
-## for backend
-open a terminal
-cd into backend
-create a python environment, it's different for mac and windows
-run ```pip install -r requirements.txt```
-start the environment
-run ```python main.py```
+## Requirements
 
-## for frontend
-open another terminal
-cd into frontend
-cd into comet-commuter-carpool
-run ```npm i```
-run ```npm run dev```
+- Node.js 18+ (Next.js 16 requires Node 18+)
+- Python 3.11+
 
-## other notes
-store api keys in ```.env```
-dont make another .env file and dont push api keys
+## Backend (Flask)
+
+```bash
+cd backend
+python3 -m venv .venv && source .venv/bin/activate  # optional but recommended
+pip install -r requirements.txt
+python app.py
+```
+
+Key endpoints live under `/api/*`:
+
+- `POST /users`, `PUT /users/:id`, `DELETE /users/:id` – profile CRUD
+- `GET /recommendations` – compatibility scoring across profiles
+- `POST /payments/suggestions` – fuel cost heuristic
+- `POST /ratings`, `GET /users/:id/reviews` – rider feedback
+- `GET /terms`, `POST /issues` – policy + feedback helpers
+
+Run backend unit tests at any time with:
+
+```bash
+pytest backend
+```
+
+## Frontend (Next.js 16 + Tailwind)
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Set `NEXT_PUBLIC_API_BASE_URL` (defaults to `http://localhost:5000/api`) if the backend runs elsewhere.
+
+### Feature routes
+
+- `/` – Overview hero + Bento navigation
+- `/profiles` – Create/edit roster entries
+- `/recommendations` – Compatibility insights + reviews
+- `/payments` – Contribution estimator
+- `/ratings` – Submit and browse ride feedback
+- `/terms` – Terms & feedback form
+
+Frontend unit tests (Vitest) cover shared calculation helpers:
+
+```bash
+npm test
+```
+
+## Notes
+
+- Do not commit secrets—use `.env.local` in the `frontend/` app and conventional environment variables for the Flask API.
+- The UI expects the Flask server to be available; status banners will appear if it is offline.
